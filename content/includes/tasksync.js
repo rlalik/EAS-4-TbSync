@@ -67,7 +67,7 @@ var Tasks = {
         if (data.ReminderSet && data.ReminderTime && data.UtcStartDate) {        
             let UtcDate = eas.tools.createDateTime(data.UtcStartDate);
             let UtcAlarmDate = eas.tools.createDateTime(data.ReminderTime);
-            let alarm = cal.createAlarm();
+            let alarm = new CalAlarm();
             alarm.related = Components.interfaces.calIAlarm.ALARM_RELATED_START; //TB saves new alarms as offsets, so we add them as such as well
             alarm.offset = UtcAlarmDate.subtractDate(UtcDate);
             alarm.action = "DISPLAY";

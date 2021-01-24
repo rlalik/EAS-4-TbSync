@@ -15,6 +15,12 @@
 
 // https://msdn.microsoft.com/en-us/library/dd299454(v=exchg.80).aspx
 
+var { XPCOMUtils } = ChromeUtils.import("resource://gre/modules/XPCOMUtils.jsm");
+
+XPCOMUtils.defineLazyModuleGetters(this, {
+  CalRecurrenceInfo: "resource:///modules/CalRecurrenceInfo.jsm",
+});
+
 var sync = {
 
     
@@ -1205,7 +1211,7 @@ wbxml.ctag();*/
     //item is a native lightning item
     setItemRecurrence: function (item, syncData, data, timezone) {
         if (data.Recurrence) {
-            item.recurrenceInfo = TbSync.lightning.cal.createRecurrenceInfo();
+            item.recurrenceInfo = new CalRecurrenceInfo();
             item.recurrenceInfo.item = item;
             let recRule = TbSync.lightning.cal.createRecurrenceRule();
             switch (data.Recurrence.Type) {
